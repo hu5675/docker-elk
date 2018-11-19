@@ -1,0 +1,53 @@
+filebeat.inputs:
+
+- type: log
+  enabled: true
+
+  # modify one : need to monitor directory
+  paths:
+    - /root/logs/*.log
+
+  fields:
+    appname: server1
+
+  multiline.pattern: ^\[ERROR\]
+  multiline.negate: true
+  multiline.match: after
+
+- type: log
+  enabled: true
+
+  paths:
+    - /root/logs_2/*.log
+
+  fields:
+    appname: server2
+
+  multiline.pattern: ^\[ERROR\]
+  multiline.negate: true
+  multiline.match: after
+
+
+# The name of the shipper that publishes the network data. It can be used to group
+# all the transactions sent by a single shipper in the web interface.
+# If this options is not defined, the hostname is used.
+# modify two : option 
+name: "bboy"
+tags: ["service-bboy", "web-bboy"]
+
+xpack.monitoring.enabled: false
+
+output.logstash:
+  hosts: ["118.190.165.171:5044"]
+
+# setup.template.name: "filebeat-%{[beat.version]}"
+# setup.template.pattern: "filebeat-%{[beat.version]}-*"
+
+
+# output.elasticsearch:
+
+#   # modify three : need to modify es cluster address
+#   hosts: ["118.190.165.171:9200","118.190.165.171:9201","118.190.165.171:9202"]
+
+#   # modify four : modify the down three line's ServiceName
+#   index: "service-name-%{+yyyy.MM.dd}"

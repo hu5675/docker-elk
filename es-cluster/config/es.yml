@@ -1,0 +1,26 @@
+cluster.name: es-cluster
+node.name: es
+node.master: true
+node.data: true
+
+network.host: es
+http.port: 9200
+transport.tcp.port: 9300
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: Authorization,X-Requested-With,Content-Length,Content-Type
+
+xpack.security.enabled: true
+xpack.license.self_generated.type: trial
+
+xpack.monitoring.collection.enabled: true
+xpack.graph.enabled: true
+xpack.watcher.enabled: true
+xpack.ml.enabled: true
+
+discovery.zen.ping.unicast.hosts: ["es:9300", "es1:9300", "es2:9300"]
+discovery.zen.minimum_master_nodes: 2
+discovery.zen.ping_timeout: 5s
+
+bootstrap.memory_lock: true
+action.destructive_requires_name: true

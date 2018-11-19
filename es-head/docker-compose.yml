@@ -1,0 +1,24 @@
+version: "2"
+services:
+  es-head:
+    image: mobz/elasticsearch-head:5
+    container_name: es-head
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    external_links:
+      - es
+    ports:
+      - "9100:9100"
+    volumes:
+      - ./vendor.js:/usr/src/app/_site/vendor.js:rw
+    networks:
+      - net-es
+
+networks:
+  net-es:
+    external: true

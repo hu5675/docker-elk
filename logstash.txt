@@ -1,0 +1,30 @@
+docker run --name logstash -it -p 5044:5044 -p 5000:5000 -p 9600:9600 --net es-cluster_net-es -v /mnt/logstash/pipeline/:/usr/share/logstash/pipeline/ -v /mnt/logstash/config/:/usr/share/logstash/config/ logstash:6.4.2 bash
+
+
+input {
+        beats {
+                port => 5000
+                codec => json
+        }
+}
+
+filter {
+    grok {
+        match => {
+            "message" => [
+                \[%{LOGLEVEL:loglevel}\] \[(?<logdate>([\s\S]*?))\](?<message>([\s\S]*))"
+            ]
+        }
+    }   
+}
+
+output {
+        stdout {
+                codec => rubydebug
+        }
+
+        elasticsearch {
+                hosts => "192.168.64.3"
+                index => "%{[fields][appname]}-index-%{+YYYY.MM.dd}"
+        }
+}

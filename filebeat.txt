@@ -1,0 +1,22 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/*.log
+
+  fields:
+    appname: server1
+    level: error
+
+  ### Multiline options
+
+  multiline.pattern: ^\[ERROR\]
+  multiline.negate: true
+  multiline.match: after
+
+name: "mars"
+tags: ["service-mars", "web-mars"]
+
+output.logstash:
+  # The Logstash hosts
+  hosts: ["118.190.165.171:5000"]

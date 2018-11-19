@@ -1,0 +1,19 @@
+解决方法:
+
+1、进入head安装目录；
+
+2、cd _site/
+
+3、编辑vendor.js  共有两处
+
+1. 6886行 /contentType: "application/x-www-form-urlencoded
+
+改成
+
+contentType: "application/json;charset=UTF-8"
+
+2. 7574行 var inspectData = s.contentType === "application/x-www-form-urlencoded" &&
+
+改成
+
+var inspectData = s.contentType === "application/json;charset=UTF-8" &&

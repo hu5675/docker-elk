@@ -1,0 +1,24 @@
+version: "2"
+services:
+  kibana:
+    image: kibana:6.4.2
+    container_name: kibana
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    external_links:
+      - es
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml:rw
+    networks:
+      - net-es
+
+networks:
+  net-es:
+    external: true

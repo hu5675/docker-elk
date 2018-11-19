@@ -1,0 +1,3 @@
+curl http://118.190.165.171:9200/_cat/nodes
+
+chmod 777 -R 本地挂在data目录

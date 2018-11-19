@@ -1,0 +1,1 @@
+docker run -d --name kibana --net es-cluster_net-es  -p 5601:5601 kibana:6.4.2

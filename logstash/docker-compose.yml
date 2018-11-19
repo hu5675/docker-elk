@@ -1,0 +1,26 @@
+version: "2"
+services:
+  logstash:
+    image: logstash:6.4.2
+    container_name: logstash
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    external_links:
+      - es
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    volumes:
+      - ./config/:/usr/share/logstash/config/:ro
+      - ./pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:rw
+    networks:
+      - net-es
+
+networks:
+  net-es:
+    external: true
