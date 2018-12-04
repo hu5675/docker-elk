@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql:5.7.24
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: zhlroot789
+      MYSQL_USER: zhl
+      MYSQL_PASS: zhlroot789
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+        - 3306:3306
+    volumes:
+      - ./data/:/var/lib/mysql/:rw
+      - ./mysql.cnf:/etc/mysql/mysql.cnf:ro
+      - ./conf.d/:/etc/mysql/conf.d/:rw
+    networks:
+      - zhl-es
+
+
+networks:
+  zhl-es:
+    external: true

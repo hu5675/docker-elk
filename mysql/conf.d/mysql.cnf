@@ -1,0 +1,19 @@
+[mysqld] 
+pid-file=/var/lib/mysql/mysqld.pid
+socket= /var/lib/mysql/mysqld.sock
+default-storage-engine=INNODB
+character-set-server=utf8
+
+table_open_cache=1024
+innodb_buffer_pool_size=3G
+innodb_flush_log_at_trx_commit=1
+innodb_log_buffer_size=2M
+innodb_thread_concurrency=8
+key_buffer_size=256M
+tmp_table_size=64M
+read_buffer_size=4M
+read_rnd_buffer_size=16M
+sort_buffer_size=32M
+max_connections=1024
+thread_cache_size=120
+query_cache_size=64M

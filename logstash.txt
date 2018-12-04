@@ -16,7 +16,14 @@ filter {
             ]
         }
     }   
+
+    date {
+        match => [ "logdate" ,"YYYY-MM-dd HH:mm:ss" , "UNIX_MS" ]
+        target => "@timestamp"
+        locale => "en"
+    }
 }
+ 
 
 output {
         stdout {
