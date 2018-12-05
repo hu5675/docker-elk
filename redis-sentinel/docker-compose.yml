@@ -1,0 +1,154 @@
+version: '3.1'
+
+services:
+
+  redis_master:
+    build: .
+    container_name: redis_master
+    restart: always
+    environment:
+      redis_port: '6379'
+    tty: true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "6379:6379"
+    networks:
+      - zhl-es
+
+  redis_slave_1:
+    image: redis-sentinel_redis_master
+    container_name: redis_slave_1
+    restart: always
+    environment:
+      master_port: '6379'
+      redis_port: '6379'
+    tty: true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "6380:6379"
+    depends_on:
+      - redis_master
+    command:
+      - slave
+    networks:
+      - zhl-es
+
+  redis_slave_2:
+    image: redis-sentinel_redis_master
+    container_name: redis_slave_2
+    restart: always
+    environment:
+      master_port: '6379'
+      redis_port: '6379'
+    tty: true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "6381:6379"
+    depends_on:
+      - redis_master
+    command:
+      - slave
+    networks:
+      - zhl-es
+
+
+  redis_sentinel_1:
+    image: redis-sentinel_redis_master
+    container_name: redis_sentinel_1
+    restart: always
+    environment:
+      master_port: '6379'
+      sentinel_port: '6379'
+    tty: true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "6382:6379"
+    depends_on:
+      - redis_master
+      - redis_slave_1
+      - redis_slave_2
+    command:
+      - sentinel
+    networks:
+      - zhl-es
+
+  redis_sentinel_2:
+    image: redis-sentinel_redis_master
+    container_name: redis_sentinel_2
+    restart: always
+    environment:
+      master_port: '6379'
+      sentinel_port: '6379'
+    tty: true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "6383:6379"
+    depends_on:
+      - redis_master
+      - redis_slave_1
+      - redis_slave_2
+    command:
+      - sentinel
+    networks:
+      - zhl-es
+
+  redis_sentinel_3:
+    image: redis-sentinel_redis_master
+    container_name: redis_sentinel_3
+    restart: always
+    environment:
+      master_port: '6379'
+      sentinel_port: '6379'
+    tty: true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "6384:6379"
+    depends_on:
+      - redis_master
+      - redis_slave_1
+      - redis_slave_2
+    command:
+      - sentinel
+    networks:
+      - zhl-es
+
+
+networks:
+  zhl-es:
+    external: true
