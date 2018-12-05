@@ -7,6 +7,7 @@ ENV TZ=Asia/Shanghai
 #设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone
 
+
 COPY redis.conf /data/redis.conf
 COPY sentinel.conf /data/sentinel.conf
 COPY start.sh /data/start.sh
