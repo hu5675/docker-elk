@@ -1,0 +1,55 @@
+version: '3.1'
+
+services:
+  zk1:
+    image: zookeeper:3.4.13
+    restart: always
+    hostname: zk1
+    container_name: zookeeper_1
+    #domainname: 
+    ports:
+      - 2181:2181
+    volumes:
+      - ./zk1/conf/zoo.cfg:/conf/zoo.cfg
+      - ./zk1/data:/data
+      - ./zk1/datalog:/datalog
+    environment:
+      ZOO_MY_ID: 1
+    networks:
+      - zhl-es
+
+  zk2:
+    image: zookeeper:3.4.13
+    restart: always
+    hostname: zk2
+    container_name: zookeeper_2
+    ports:
+      - 2182:2181
+    volumes:
+      - ./zk2/conf/zoo.cfg:/conf/zoo.cfg
+      - ./zk2/data:/data
+      - ./zk2/datalog:/datalog
+    environment:
+      ZOO_MY_ID: 2
+    networks:
+      - zhl-es
+
+  zk3:
+    image: zookeeper:3.4.13
+    restart: always
+    hostname: zk3
+    container_name: zookeeper_3
+    ports:
+      - 2183:2181
+    volumes:
+      - ./zk3/conf/zoo.cfg:/conf/zoo.cfg
+      - ./zk3/data:/data
+      - ./zk3/datalog:/datalog
+    environment:
+      ZOO_MY_ID: 3
+    networks:
+      - zhl-es
+
+networks:
+  zhl-es:
+    external: true
