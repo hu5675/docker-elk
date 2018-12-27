@@ -6,7 +6,10 @@ ENV TZ=Asia/Shanghai
 #设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone
 
-COPY redis.conf /data/redis.conf
+WORKDIR /conf
+COPY redis.conf /conf/redis.conf
 RUN echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf
+
+WORKDIR /data
 RUN chown redis:redis /data/*
-ENTRYPOINT ["redis-server","/data/redis.conf"] 
+ENTRYPOINT ["redis-server","/conf/redis.conf"] 

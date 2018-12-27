@@ -18,6 +18,8 @@ services:
         hard: 65536
     ports:
       - "6379:6379"
+    volumes:
+      - ./data/:/data/:rw
     networks:
       - zhl-es
 
