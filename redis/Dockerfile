@@ -11,5 +11,5 @@ COPY redis.conf /conf/redis.conf
 RUN echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf
 
 WORKDIR /data
-RUN chown redis:redis /data/*
+#RUN chown redis:redis /data/*
 ENTRYPOINT ["redis-server","/conf/redis.conf"] 
