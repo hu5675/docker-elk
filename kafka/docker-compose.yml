@@ -1,0 +1,22 @@
+version: '2'
+services:
+  # zookeeper:
+  #   image: wurstmeister/zookeeper
+  #   ports:
+  #     - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 121.42.215.63
+      KAFKA_ZOOKEEPER_CONNECT: 121.42.215.63:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net-es
+
+networks:
+  net-es:
+    external: true
