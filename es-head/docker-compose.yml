@@ -17,8 +17,8 @@ services:
     volumes:
       - ./vendor.js:/usr/src/app/_site/vendor.js:rw
     networks:
-      - net-es
+      - zhl-es
 
 networks:
-  net-es:
+  zhl-es:
     external: true

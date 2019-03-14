@@ -19,8 +19,8 @@ services:
       - ./config/:/usr/share/logstash/config/:ro
       - ./pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:rw
     networks:
-      - net-es
+      - zhl-es
 
 networks:
-  net-es:
+  zhl-es:
     external: true

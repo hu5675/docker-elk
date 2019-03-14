@@ -19,7 +19,7 @@ services:
       - ./config/es.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./data/es/:/usr/share/elasticsearch/data/:rw
     networks:
-      - net-es
+      - zhl-es
   es1:
     image: elasticsearch:6.4.2
     container_name: es1
@@ -39,7 +39,7 @@ services:
       - ./config/es1.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./data/es1:/usr/share/elasticsearch/data/:rw
     networks:
-      - net-es
+      - zhl-es
   es2:
     image: elasticsearch:6.4.2
     container_name: es2
@@ -59,9 +59,9 @@ services:
       - ./config/es2.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./data/es2/:/usr/share/elasticsearch/data/:rw
     networks:
-      - net-es
+      - zhl-es
 networks:
-  net-es:
+  zhl-es:
     external: true
 
 

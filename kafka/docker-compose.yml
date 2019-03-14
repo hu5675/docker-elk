@@ -15,8 +15,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - net-es
+      - zhl-es
 
 networks:
-  net-es:
+  zhl-es:
     external: true

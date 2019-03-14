@@ -17,8 +17,8 @@ services:
     volumes:
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml:rw
     networks:
-      - net-es
+      - zhl-es
 
 networks:
-  net-es:
+  zhl-es:
     external: true
