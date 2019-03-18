@@ -3,7 +3,7 @@
 echo  "create es-cluster"
 cd es-cluster
 chmod 777 -R data
-docker network create net-es
+docker network create zhl-es
 docker-compose up -d
 
 # echo  "wait one minute."
